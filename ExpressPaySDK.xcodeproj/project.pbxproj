@@ -103,6 +103,7 @@
 		11E2BE2925FA7E890044770F /* ExpressPayGetTransactionDetailsDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2BE2825FA7E890044770F /* ExpressPayGetTransactionDetailsDeserializer.swift */; };
 		11E2BE2C25FA7ECF0044770F /* ExpressPayGetTransactionStatusDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2BE2B25FA7ECF0044770F /* ExpressPayGetTransactionStatusDeserializer.swift */; };
 		11E2BE3125FA80500044770F /* XWWWFormUrlEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2BE3025FA80500044770F /* XWWWFormUrlEncodable.swift */; };
+		3077EA3C2975407900608D44 /* ExpressPaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3077EA3B2975407900608D44 /* ExpressPaySDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -227,6 +228,7 @@
 		11E2BE2825FA7E890044770F /* ExpressPayGetTransactionDetailsDeserializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressPayGetTransactionDetailsDeserializer.swift; sourceTree = "<group>"; };
 		11E2BE2B25FA7ECF0044770F /* ExpressPayGetTransactionStatusDeserializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressPayGetTransactionStatusDeserializer.swift; sourceTree = "<group>"; };
 		11E2BE3025FA80500044770F /* XWWWFormUrlEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XWWWFormUrlEncodable.swift; sourceTree = "<group>"; };
+		3077EA3B2975407900608D44 /* ExpressPaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ExpressPaySDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3077EA3C2975407900608D44 /* ExpressPaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +383,7 @@
 		11C1231A25D4734A002B42B3 = {
 			isa = PBXGroup;
 			children = (
+				3077EA3B2975407900608D44 /* ExpressPaySDK.framework */,
 				11C1232625D4734A002B42B3 /* ExpressPaySDK */,
 				1197845B25F91A2A00DB4EC7 /* Sample */,
 				11C1232525D4734A002B42B3 /* Products */,
@@ -1078,6 +1082,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ExpressPaySDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1106,6 +1114,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ExpressPaySDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
