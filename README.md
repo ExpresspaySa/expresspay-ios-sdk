@@ -19,7 +19,7 @@ The main aspects of the ExpressPay iOS SDK:
 - Sample Application
 
 To properly set up the SDK, read [Wiki](https://github.com/ExpresspaySa/expresspay-ios-sdk/wiki) first.
-To get used to the SDK, download a [sample app](https://github.com/ExpresspaySa/expressPay-ios-sdk/tree/main/sample).
+To get used to the SDK, download a [sample app](https://github.com/ExpresspaySa/expressPay-ios-sdk/tree/main/Sample).
 
 ## Setup
 
