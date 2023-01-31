@@ -1,4 +1,4 @@
-[View SDK Wiki](https://github.com/ExpresspaySa/expressPay-ios-sdk/wiki) | [Report new issue](https://github.com/ExpresspaySa/expressPay-ios-sdk/issues/new)
+[Report new issue](https://github.com/ExpresspaySa/expressPay-ios-sdk/issues/new)
 
 # ExpressPay iOS SDK
 
