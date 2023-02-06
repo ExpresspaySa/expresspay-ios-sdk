@@ -50,11 +50,11 @@ public final class ExpressPaySaleOrder: ExpressPayOrder {
     }
     
     func formatedAmountString() -> String{
-        var formatter = NumberFormatter()
+        let formatter = NumberFormatter()
         formatter.currencyCode = currency
         formatter.numberStyle = .currency
 
-        let value = String(format: "%.\(formatter.minimumFractionDigits)f", 1.0)
+        let value = String(format: "%.\(formatter.minimumFractionDigits)f", amount)
         return value
     }
 }

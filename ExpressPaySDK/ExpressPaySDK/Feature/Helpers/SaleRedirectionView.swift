@@ -9,9 +9,13 @@ import Foundation
 import UIKit
 import WebKit
 
+fileprivate var shouldDismiss:Bool = true
+
+let ExpressPayProcessCompleteCallbackUrl = "https://expresspay.sa/success"
+fileprivate var response3ds:ExpressPay3dsResponse?
 
 public class SaleRedirectionView : WKWebView{
-    
+    var onLoading:((Bool) -> Void)? = nil
     private var logs:Bool = false
     private var response:ExpressPaySaleRedirect!
     
@@ -21,7 +25,7 @@ public class SaleRedirectionView : WKWebView{
     private var onTransactionSuccess:((ExpressPay3dsResponse)->Void)?
     private var onTransactionFailure:((ExpressPay3dsResponse)->Void)?
     
-    private var presenterViewController = UIViewController()
+    private var sale3dsViewController:Secure3DSVC!
 
     override init(frame: CGRect, configuration:WKWebViewConfiguration) {
         super.init(frame: frame, configuration:configuration)
@@ -35,31 +39,11 @@ public class SaleRedirectionView : WKWebView{
     
     public override func layoutSubviews() {
         setupView()
-        if let controller = self.next as? UIViewController{
-            presenterViewController = controller
-        }
     }
     
     
     private func setupView() {
-        
-        // prepare json data
-        let json: [String: Any] = ["body": response.redirectParams.body ?? ""]
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
-
-//        let url = URL(string: "https://google.com")!
-        let url = URL(string: response.redirectUrl)!
-        var request = URLRequest(url: url)
-        request.httpMethod = response.redirectMethod.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = jsonData
-        
-        load(request)
-        
-        navigationDelegate = self
-        uiDelegate = self
-        
-        onStartIn?(presenterViewController)
+        onStartIn?(sale3dsViewController)
     }
     
     public func setup(response:ExpressPaySaleRedirect, onTransactionSuccess:((ExpressPay3dsResponse)->Void)?, onTransactionFailure:((ExpressPay3dsResponse)->Void)?) -> SaleRedirectionView{
@@ -85,14 +69,17 @@ public class SaleRedirectionView : WKWebView{
             return
         }
         
-        presenterViewController.view = self
+        navigationDelegate = self
+        uiDelegate = self
+        
+        sale3dsViewController = Secure3DSVC.with(content: self, response: response)
         
         if let navigationController  =  owner as? UINavigationController{
-            navigationController.pushViewController(presenterViewController, animated: true)
+            navigationController.pushViewController(sale3dsViewController, animated: true)
             return
         }
         
-        owner.present(presenterViewController, animated: true)
+        owner.present(sale3dsViewController, animated: true)
                 
     }
     
@@ -105,6 +92,10 @@ public class SaleRedirectionView : WKWebView{
         logs = false
         return self
     }
+    
+    private func webViewLoading(_ loading:Bool){
+        onLoading?(loading)
+    }
 
 }
 
@@ -114,27 +105,33 @@ extension SaleRedirectionView : WKNavigationDelegate{
         print(webView)
         
         let url = navigationAction.request.url?.description ?? ""
-        let body = String(data: navigationAction.request.httpBody ?? Data(), encoding: .utf8)  ?? "None"
+        _ = String(data: navigationAction.request.httpBody ?? Data(), encoding: .utf8)  ?? "None"
         
         logRequest(request: navigationAction.request)
     
         if url.lowercased().starts(with: "https://api.expresspay.sa/verify/"), let body = navigationAction.request.httpBody{
             if let params = parseHttpBody(httpBody: body){
                 if params.result != nil{
-                    operationCompleted(result: params)
+                    response3ds = params
                 }
             }
+        }
+        
+        if url.lowercased().starts(with: ExpressPayProcessCompleteCallbackUrl){
+            operationCompleted(result: response3ds!)
+            decisionHandler(.cancel)
+            return
         }
         decisionHandler(.allow)
     }
     
     private func operationCompleted(result:ExpressPay3dsResponse){
         if result.result == .success{
-            presenterViewController.dismiss(animated: true) {
+            sale3dsViewController.dismiss(animated: true) {
                 self.onTransactionSuccess?(result)
             }
         }else if result.result == .failure{
-            presenterViewController.dismiss(animated: true) {
+            sale3dsViewController.dismiss(animated: true) {
                 self.onTransactionFailure?(result)
             }
         }
@@ -166,6 +163,18 @@ extension SaleRedirectionView : WKNavigationDelegate{
     
         return nil
     }
+    
+    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        webViewLoading(true)
+    }
+    
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webViewLoading(false)
+    }
+    
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        webViewLoading(false)
+    }
 }
 
 
@@ -192,5 +201,64 @@ extension SaleRedirectionView{
 
 extension SaleRedirectionView : WKUIDelegate{
     
+}
+
+
+final class Secure3DSVC : UIViewController{
+    var content:SaleRedirectionView?
+    var response:ExpressPaySaleRedirect!
+    private let loading = UIActivityIndicatorView()
+    
+    class func with(content:SaleRedirectionView, response:ExpressPaySaleRedirect) -> Secure3DSVC{
+        let vc = Secure3DSVC()
+        vc.content = content
+        vc.response = response
+        return vc
+    }
+    
+    override func viewDidLoad() {
+        if #available(iOS 13.0, *) {
+            isModalInPresentation = true
+        } else {
+            // Fallback on earlier versions
+        }
+
+        response3ds = nil
+        
+        content?.fixInView(view, margin: 20)
+        loading.fixInView(view, margin: 0)
+        
+        loading.startAnimating()
+        loading.tintColor = UIColor.black
+        if #available(iOS 13.0, *) {
+            loading.style = .large
+        } else {
+            loading.style = .whiteLarge
+            
+        }
+        
+        // prepare json data
+        let json: [String: Any] = ["body": response.redirectParams.body ?? ""]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+
+//        var request = URLRequest(url: URL(string: "https://google.com")!)
+        var request = URLRequest(url: URL(string: response.redirectUrl)!)
+        request.httpMethod = response.redirectMethod.rawValue
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        content?.load(request)
+        
+        content?.onLoading = { isLoading in
+            self.loading.isHidden = !isLoading
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return shouldDismiss
+    }
 }
 

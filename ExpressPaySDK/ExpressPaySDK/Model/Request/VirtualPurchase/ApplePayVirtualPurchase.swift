@@ -36,7 +36,9 @@ class ApplePayVirtualPurchase{
                     "details" : paymentString
                 ]
             }
-            data = try? JSONSerialization.data(withJSONObject: json)
+            if let j = json{
+                data = try? JSONSerialization.data(withJSONObject: j)
+            }
         }
     }
     

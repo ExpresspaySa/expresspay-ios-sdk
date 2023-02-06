@@ -15,6 +15,9 @@ public enum ExpressPayTransactionType: String, Codable {
     /// 3DS transaction type.
     case secure3d = "SECURE_3D"
     
+    /// 3DS transaction type.
+    case threeDs = "3DS"
+    
     /// SALE transaction type.
     case sale = "SALE"
     
@@ -29,6 +32,9 @@ public enum ExpressPayTransactionType: String, Codable {
      
     /// REFUND transaction type.
     case refund = "REFUND"
+     
+    /// REFUND transaction type.
+    case redirect = "REDIRECT"
     
     /// CHARGEBACK transaction type.
     case chargeback = "CHARGEBACK"

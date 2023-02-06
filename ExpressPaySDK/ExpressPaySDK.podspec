@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
   #
   
   spec.name         = "ExpressPaySDK"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "ExpressPaySDK is an payment SDK library written in Swift."
   
   # This description is used to generate tags and improve search results.
@@ -74,7 +74,6 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/expressPay/expressPay-ios-sdk.git", :tag => "#{spec.version}" }
 
-
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  CocoaPods is smart about how it includes source code. For source files
@@ -83,7 +82,14 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "ExpressPaySDK/**/*.{swift}"
+  spec.source_files  = "#{spec.name}/**/*.{swift,xib,framework,xcassets}"
+  
+#  spec.resource_bundles = {
+#    "ExpressPaySDK" => [
+#      "ExpressPaySDK/**/*.{imageset,xcassets}",
+#    ]
+#  }
+  
   spec.exclude_files = "Classes/Exclude"
 
 end

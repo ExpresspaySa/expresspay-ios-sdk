@@ -43,4 +43,12 @@ public enum ExpressPaySaleResult: Decodable {
     public init(from decoder: Decoder) throws {
         self = try ExpressPaySaleDeserializer().decode(from: decoder)
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case success
+        case decline
+        case recurring
+        case secure3d
+        case redirect
+    }
 }
