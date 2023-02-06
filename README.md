@@ -1,4 +1,4 @@
-[View SDK Wiki](https://github.com/ExpresspaySa/expressPay-ios-sdk/wiki) | [Report new issue](https://github.com/ExpresspaySa/expressPay-ios-sdk/issues/new)
+[Report new issue](https://github.com/ExpresspaySa/expressPay-ios-sdk/issues/new)
 
 # ExpressPay iOS SDK
 
@@ -18,7 +18,6 @@ The main aspects of the ExpressPay iOS SDK:
 - Minimum iOS 11
 - Sample Application
 
-To properly set up the SDK, read [Wiki](https://github.com/ExpresspaySa/expresspay-ios-sdk/wiki) first.
 To get used to the SDK, download a [sample app](https://github.com/ExpresspaySa/expressPay-ios-sdk/tree/main/Sample).
 
 ## Setup
