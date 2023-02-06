@@ -322,15 +322,17 @@ fileprivate func startPurchase(payment:PKPayment, completion:@escaping ((Bool,[S
                             return
                         }else if let data = resp.data{
                             let error = String(data:data, encoding:.utf8)
-                            _onTransactionFailure?(["error" : error ?? "undefined"])
-                            log(label: "Error", object:error)
+                            completion(false, ["error" : error ?? "Error while performing purchase on '../processing/purchase/virtual'"])
+                            log(label: "Error", object:error ?? "Error while performing purchase on '../processing/purchase/virtual'")
+                            return
                         }else if error != nil{
-                            log(label: "Exception", object:error)
+                            completion(false, ["error" : error ?? "Error while performing purchase on '../processing/purchase/virtual'"])
+                            log(label: "Exception", object: error ?? "Error while performing purchase on '../processing/purchase/virtual'")
+                            return
                         }
                         
-                        completion(false, ["error" : "Error while create expresspay auth session token for '../purchase'"])
-                        log(label: "Error", object:"Error while create expresspay auth session token for '../purchase'")
-                        log(label: "Error", object:error)
+                        completion(false, ["error" : "Error while performing purchase on '../processing/purchase/virtual'"])
+                        log(label: "Error", object: error ?? "Error while performing purchase on '../processing/purchase/virtual'")
                     }
                 }.resume()
                 

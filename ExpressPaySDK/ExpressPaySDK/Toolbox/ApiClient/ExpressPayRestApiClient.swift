@@ -155,8 +155,9 @@ public struct ExpressPayDataResponse {
     func httpOK() -> Bool{
         if let urlDataResponse = response as? HTTPURLResponse {
             let statusCode = urlDataResponse.statusCode
-            print("HTTP Status Code: \(statusCode == 200 ? "SUCCESS" : "ERROR") \(statusCode)\n")
-            return statusCode == 200
+            print("HTTP Status Code: \(statusCode >= 200 && statusCode <= 299  ? "SUCCESS" : "ERROR") \(statusCode)\n")
+            
+            return statusCode >= 200 && statusCode <= 299 
         }
         return false
     }
