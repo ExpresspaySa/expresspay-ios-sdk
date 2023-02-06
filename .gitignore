@@ -9,6 +9,7 @@
 /app/debug
 .DS_Store
 /captures
+/Sample/Credentials.swift
 .externalNativeBuild
 
 .idea/*

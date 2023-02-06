@@ -134,13 +134,14 @@ private extension ApplePayVC {
         ExpressApplePay()
             .set(order: order)
             .set(payer: payer)
-            .set(applePayMerchantID: "merchant.com.expresspay.sdk")
+            .set(applePayMerchantID: EXPRESS_APPLEPAY_MERCHANT_ID)
+            .enable(logs: true)
             .on(authentication: { auth in
                 debugPrint("onAuthentication: \(String(data: auth.token.paymentData, encoding: .utf8)!)")
             }).on(transactionFailure: { res in
-
+                debugPrint(res)
             }).on(transactionSuccess: { res in
-
+                debugPrint(res)
             }).initialize(
                 target: self,
                 onError: { errors in

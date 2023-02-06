@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bPI-up-yau">
-                                <rect key="frame" x="16" y="319" width="382" height="258"/>
+                                <rect key="frame" x="16" y="300" width="382" height="296"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQU-7j-rOC" customClass="ExpressPayButton" customModule="Sample" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
@@ -63,8 +63,15 @@
                                             <segue destination="MhT-Yo-U0k" kind="show" id="oOJ-lq-gno"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdb-Hd-H2h" customClass="ExpressPayButton" customModule="Sample" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6Q-w2-OiH" customClass="ExpressPayButton" customModule="Sample" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="228" width="382" height="30"/>
+                                        <state key="normal" title="SALE_WITH_CARD_UI"/>
+                                        <connections>
+                                            <action selector="btnPayWithCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uZX-SI-hQb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdb-Hd-H2h" customClass="ExpressPayButton" customModule="Sample" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="266" width="382" height="30"/>
                                         <state key="normal" title="APPLE_PAY"/>
                                         <connections>
                                             <segue destination="nG2-AU-EXm" kind="show" id="HBn-h4-5Zs"/>

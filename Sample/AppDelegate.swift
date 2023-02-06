@@ -27,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // https://github.com/yassram/YRPayment
         let expressPayCredential = ExpressPayCredential(
-            clientKey: "58e9490c-842c-11ed-a834-7663276044b1",
-            clientPass: "699780707e6b2351a8337883a2a3d4ac",
+            clientKey: EXPRESSPAY_MERCHANT_KEY,
+            clientPass: EXPRESSPAY_MERCHANT_PASSWORD,
             paymentUrl: "https://api.expresspay.sa/post"
         )
         
