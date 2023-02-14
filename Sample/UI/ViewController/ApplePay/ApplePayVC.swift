@@ -109,6 +109,8 @@ private extension ApplePayVC {
     
     func executeRequest() {
         
+        
+        
         let order = ExpressPaySaleOrder(id: tfOrderId.text ?? "",
                                        amount: Double(tfOrderAmount.text ?? "") ?? 0,
                                        currency: tfOrderCurrencyCode.text ?? "",
@@ -151,28 +153,6 @@ private extension ApplePayVC {
                     debugPrint("onPresent: (-:")
                 }
             )
-    }
-    
-    func redirect(response:ExpressPaySaleRedirect){
-        
-        SaleRedirectionView()
-            .setup(response: response, onTransactionSuccess: { result in
-                print("onTransactionSuccess: \(result)")
-                
-            }, onTransactionFailure: { result in
-                print("onTransactionFailure: \(result)")
-                
-            })
-            .enableLogs()
-            .show(owner: self, onStartIn: { viewController in
-                print("onStart: \(viewController)")
-                
-            }, onError: { error in
-                print("onError: \(error)")
-                
-            })
-
-        
     }
     
 }

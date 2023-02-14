@@ -85,8 +85,7 @@
 		11E2BE1525FA325F0044770F /* ExpressPayChooserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressPayChooserVC.swift; sourceTree = "<group>"; };
 		11E2BE1925FA394B0044770F /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		2799DC40C40D711C285FC999 /* Pods-Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.debug.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.debug.xcconfig"; sourceTree = "<group>"; };
-		3044D6E7297D822600F81550 /* success_logs.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = success_logs.md; sourceTree = "<group>"; };
-		3044D6E8297D836400F81550 /* auth_failure_logs.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = auth_failure_logs.md; sourceTree = "<group>"; };
+		3028B2282994E2DF00FEAE21 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3044D6EE297E944600F81550 /* Sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sample.entitlements; sourceTree = "<group>"; };
 		3044D6F4297EBA0E00F81550 /* ApplePayVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplePayVC.swift; sourceTree = "<group>"; };
 		3044D6F5297EBA0E00F81550 /* ApplePay.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ApplePay.storyboard; sourceTree = "<group>"; };
@@ -123,7 +122,6 @@
 				1197846525F91A2C00DB4EC7 /* Assets.xcassets */,
 				1197846725F91A2C00DB4EC7 /* LaunchScreen.storyboard */,
 				1197846A25F91A2C00DB4EC7 /* Info.plist */,
-				3044D6E7297D822600F81550 /* success_logs.md */,
 			);
 			path = Sample;
 			sourceTree = "<group>";
@@ -250,7 +248,7 @@
 		11C1231A25D4734A002B42B3 = {
 			isa = PBXGroup;
 			children = (
-				3044D6E8297D836400F81550 /* auth_failure_logs.md */,
+				3028B2282994E2DF00FEAE21 /* README.md */,
 				1197845B25F91A2A00DB4EC7 /* Sample */,
 				11C1232525D4734A002B42B3 /* Products */,
 				1197847025F91A3F00DB4EC7 /* Frameworks */,

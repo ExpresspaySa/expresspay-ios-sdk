@@ -40,7 +40,7 @@ final class MainVC: UIViewController {
             currency: "SAR",
             description: "Test Order"
         )
-        
+    
             
         // The way to present by your style or own
 //        present(
@@ -48,10 +48,10 @@ final class MainVC: UIViewController {
 //                target: self,
 //                payer: payer,
 //                order: order,
-//                transactionSuccess: { res in
+//                transactionSuccess: { res, data  in
 //                    debugPrint(res)
 //
-//                }, transactionFailure: { err in
+//                }, transactionFailure: { err, data in
 //                    debugPrint(err)
 //
 //                }, onError: { err in

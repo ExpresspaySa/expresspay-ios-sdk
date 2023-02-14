@@ -1,8 +1,8 @@
-[Report new issue](https://github.com/ExpresspaySa/expressPay-ios-sdk/issues/new)
+[View SDK Wiki](https://github.com/ExpresspaySa/expressPay-ios-sdk/wiki) | [Report new issue](https://github.com/ExpresspaySa/expressPay-ios-sdk/issues/new)
 
 # ExpressPay iOS SDK
 
-ExpressPay is a white-label payment software provider. Thanks to our 15+ years of experience in the payment industry, we’ve developed a state-of-the-art white-label payment system that ensures smooth and uninterrupted payment flow for merchants across industries.
+ExpressPay is a payment gateway. Thanks to our 15+ years of experience in the payment industry, we’ve developed a state-of-the-art white-label payment system that ensures smooth and uninterrupted payment flow for merchants across industries.
 
 <p align="center">
   <a href="https://expresspay.sa">
@@ -25,12 +25,12 @@ To get used to the SDK, download a [sample app](https://github.com/ExpresspaySa/
 Add to the `Podfile`:
 
 ```
-pod 'ExpressPaySDK'
+pod 'ExpressPaySDK' #Note: Currently adding ExpressPaySDK as pod dependency is not available)
 ```
 
 Latest version is: ![](https://cocoapod-badges.herokuapp.com/v/ExpressPaySDK/badge.png) 
 
-Also, it is possible to download the latest artifact from the [releases page](https://github.com/ExpresspaySa/expresspay-ios-sdk/releases).
+Also, it is possible to download the latest artifact from the [releases page](https://github.com/ExpresspaySa/expresspay-ios-sdk-framework/releases).
 
 ## Sample
 
@@ -44,19 +44,19 @@ Also, it is possible to download the latest artifact from the [releases page](ht
 
 ## Getting help
 
-To report a specific issue or feature request, open a [new issue](https://github.com/ExpresspaySa/expressPay-ios-sdk/issues/new).
+To report a specific issue or feature request, open a [new issue](https://github.com/ExpresspaySa/expresspay-ios-sdk-framework/issues/new).
 
 Or write a direct letter to the [itsupport@expresspay.sa](mailto:admin@expresspay.sa).
 
 ## License
 
-MIT License. See the [LICENSE](https://github.com/ExpresspaySa/expressPay-ios-sdk/blob/main/LICENSE) file for more details.
+MIT License. See the [LICENSE](https://github.com/ExpresspaySa/expresspay-ios-sdk-framework/blob/main/LICENSE) file for more details.
 
 ## Contacts
 
-Website: https://expresspay.sa 
-Phone: [+31-638-7642-70](tel:31638764270)  
-Email: [itsupport@expresspay.sa](mailto:admin@expresspay.sa)  
-Address: Olaya Street, Riyadh, Saudi Arabia 
+Website: https://expresspay.sa  
+Phone: [+966920033633](tel:+966920033633)  
+Email: [itsupport@expresspay.sa](mailto:itsupport@expresspay.sa)  
+Address: ExpressPay, Olaya Street, Riyadh, Saudi Arabia
 
-© 2021 - 2023 ExpressPay. All rights reserved.
+© 2023 - 2024 ExpressPay. All rights reserved.

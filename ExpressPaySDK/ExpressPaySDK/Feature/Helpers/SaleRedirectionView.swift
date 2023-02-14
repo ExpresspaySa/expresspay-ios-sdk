@@ -11,7 +11,7 @@ import WebKit
 
 fileprivate var shouldDismiss:Bool = true
 
-let ExpressPayProcessCompleteCallbackUrl = "https://expresspay.sa/success"
+let ExpressPayProcessCompleteCallbackUrl = "https://expresspay.sa/process-completed"
 fileprivate var response3ds:ExpressPay3dsResponse?
 
 public class SaleRedirectionView : WKWebView{

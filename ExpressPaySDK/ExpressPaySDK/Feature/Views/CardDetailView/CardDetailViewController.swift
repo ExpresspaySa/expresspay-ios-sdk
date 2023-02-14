@@ -404,7 +404,7 @@ public class ExpressCardPay{
                                           order:ExpressPaySaleOrder,
                                           transactionSuccess:@escaping TransactionCallback,
                                           transactionFailure:@escaping TransactionCallback,
-                                          onError:@escaping ((Any) -> Void),
+                                          onError:@escaping ErrorCallback,
                                           onPresent:(() ->Void)?) -> UIViewController{
             _target = target
             _payer = payer

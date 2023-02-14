@@ -105,7 +105,6 @@ public class ExpressApplePay{
                 PKPaymentSummaryItem(label: label, amount: NSDecimalNumber(value: _order.amount), type: .final)
             ]
         }
-        
         request.supportedNetworks = supportedPaymentNetworks
         if supportedPaymentNetworks.isEmpty{
             request.supportedNetworks = PKPaymentRequest.availableNetworks()
