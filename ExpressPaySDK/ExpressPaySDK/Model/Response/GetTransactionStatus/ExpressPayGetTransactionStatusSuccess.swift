@@ -18,7 +18,7 @@ public struct ExpressPayGetTransactionStatusSuccess: ExpressPayResultProtocol {
     public let transactionId: String
 }
 
-extension ExpressPayGetTransactionStatusSuccess: Decodable {
+extension ExpressPayGetTransactionStatusSuccess: Codable {
     enum CodingKeys: String, CodingKey {
         case action, result, status
         case orderId = "order_id"

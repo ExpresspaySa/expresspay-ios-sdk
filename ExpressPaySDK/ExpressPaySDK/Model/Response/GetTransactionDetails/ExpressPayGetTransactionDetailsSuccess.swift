@@ -20,13 +20,15 @@ public struct ExpressPayGetTransactionDetailsSuccess: OrderExpressPayResultProto
   
     public let action: ExpressPayAction
     
-    public let result: ExpressPayResult
+    public var result: ExpressPayResult
     
-    public let status: ExpressPayStatus
+    public var status: ExpressPayStatus
     
     public let orderId: String
     
     public let transactionId: String
+    
+    public let declineReason: String?
     
     /// Payer name.
     public let name: String
@@ -48,18 +50,19 @@ public struct ExpressPayGetTransactionDetailsSuccess: OrderExpressPayResultProto
     public let transactions: [ExpressPayTransaction]
 }
 
-extension ExpressPayGetTransactionDetailsSuccess: Decodable {
+extension ExpressPayGetTransactionDetailsSuccess: Codable {
     enum CodingKeys: String, CodingKey {
         case action, result, status, name, mail, ip, card, transactions
         case orderAmount = "amount"
         case orderCurrency = "currency"
         case orderId = "order_id"
         case transactionId = "trans_id"
+        case declineReason = "decline_reason"
     }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         action = try container.decode(ExpressPayAction.self, forKey: .action)
         result = try container.decode(ExpressPayResult.self, forKey: .result)
         status = try container.decode(ExpressPayStatus.self, forKey: .status)
@@ -71,7 +74,14 @@ extension ExpressPayGetTransactionDetailsSuccess: Decodable {
         orderCurrency = try container.decode(String.self, forKey: .orderCurrency)
         card = try container.decode(String.self, forKey: .card)
         transactions = try container.decode([ExpressPayTransaction].self, forKey: .transactions)
+
+        declineReason = try? container.decode(String.self, forKey: .declineReason)
         
         orderAmount = Double(try container.decode(String.self, forKey: .orderAmount)) ?? 0
     }
+    
+//    public func encode(to encoder: Encoder) throws {
+//        var container = try encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(orderAmount, forKey: .orderAmount)
+//    }
 }

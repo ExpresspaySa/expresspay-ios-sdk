@@ -10,7 +10,7 @@ import Foundation
 /// The method of transferring parameters (POST/GET).
 /// 
 /// See *ExpressPaySale3ds*
-public enum ExpressPayRedirectMethod: String, Decodable {
+public enum ExpressPayRedirectMethod: String, Codable {
     
     /// GET redirect method value.
     case get = "GET"

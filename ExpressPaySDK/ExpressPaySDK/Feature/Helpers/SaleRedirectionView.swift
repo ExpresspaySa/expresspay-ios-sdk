@@ -109,7 +109,12 @@ extension SaleRedirectionView : WKNavigationDelegate{
         
         logRequest(request: navigationAction.request)
     
-        if url.lowercased().starts(with: "https://api.expresspay.sa/verify/"), let body = navigationAction.request.httpBody{
+        if url.lowercased().starts(with: "https://pay.expresspay.sa/interaction/"){
+            
+        }
+        
+        if url.lowercased().starts(with: "https://api.expresspay.sa/verify/"),
+           let body = navigationAction.request.httpBody{
             if let params = parseHttpBody(httpBody: body){
                 if params.result != nil{
                     response3ds = params
@@ -118,7 +123,13 @@ extension SaleRedirectionView : WKNavigationDelegate{
         }
         
         if url.lowercased().starts(with: ExpressPayProcessCompleteCallbackUrl){
-            operationCompleted(result: response3ds!)
+            operationCompleted(
+                result: response3ds ?? ExpressPay3dsResponse(
+                    orderId: response.orderId, transactionId: response.transactionId,
+                    ciphertext: nil, nonce: nil, tag: nil,
+                    result: .failure, gatewayRecommendation: .dontProceed
+                )
+            )
             decisionHandler(.cancel)
             return
         }
@@ -248,7 +259,20 @@ final class Secure3DSVC : UIViewController{
         request.httpBody = jsonData
         content?.load(request)
         
-        content?.onLoading = { isLoading in
+        content?.onLoading = loading
+        
+        content?.scrollView.showsVerticalScrollIndicator = false
+        content?.scrollView.showsHorizontalScrollIndicator = false
+    }
+    
+    func loading(isLoading:Bool){
+        if isLoading == false{
+            Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
+                self.loading.isHidden = !isLoading
+                timer.invalidate()
+            }
+            
+        }else{
             self.loading.isHidden = !isLoading
         }
     }

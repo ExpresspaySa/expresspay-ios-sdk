@@ -47,7 +47,7 @@ public struct ExpressPaySaleRedirect: DetailsExpressPayResultProtocol {
     }
 }
 
-extension ExpressPaySaleRedirect: Decodable {
+extension ExpressPaySaleRedirect: Codable {
     enum CodingKeys: String, CodingKey {
         case action, result, status, descriptor
         case orderId = "order_id"
@@ -77,4 +77,33 @@ extension ExpressPaySaleRedirect: Decodable {
 
         descriptor = try container.decodeIfPresent(String.self, forKey: .descriptor)
     }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = try encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(action, forKey: .action)
+        try container.encode(result, forKey: .result)
+        try container.encode(status, forKey: .status)
+        try container.encode(orderId, forKey: .orderId)
+        try container.encode(transactionId, forKey: .transactionId)
+        try container.encode(orderCurrency, forKey: .orderCurrency)
+        try container.encode(redirectUrl, forKey: .redirectUrl)
+        try container.encode(redirectParams, forKey: .redirectParams)
+        try container.encode(redirectMethod, forKey: .redirectMethod)
+        
+        try container.encode(orderAmount, forKey: .orderAmount)
+        try container.encode(ExpressPayDateFormatter.string(from: transactionDate), forKey: .transactionDate)
+        try container.encode(descriptor, forKey: .descriptor)
+
+    }
+}
+
+
+public struct Test {
+    
+    public let orderId: String
+    
+    public let transactionId: String
+    
+    public let transactionDate: Date
+    
 }

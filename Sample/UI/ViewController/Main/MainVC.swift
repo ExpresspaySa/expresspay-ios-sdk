@@ -36,7 +36,7 @@ final class MainVC: UIViewController {
         
         let order = ExpressPaySaleOrder(
             id: UUID().uuidString,
-            amount: 0.10,
+            amount: 0.01,
             currency: "SAR",
             description: "Test Order"
         )

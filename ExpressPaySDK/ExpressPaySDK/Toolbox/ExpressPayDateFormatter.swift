@@ -18,4 +18,8 @@ final class ExpressPayDateFormatter {
     static func date(from string: String) -> Date? {
         formatter.date(from: string)
     }
+    
+    static func string(from: Date) -> String? {
+        formatter.string(from: from)
+    }
 }

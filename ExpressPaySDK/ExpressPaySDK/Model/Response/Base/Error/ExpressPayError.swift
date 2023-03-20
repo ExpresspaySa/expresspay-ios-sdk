@@ -30,7 +30,7 @@ public struct ExpressPayError: Error {
     public var localizedDescription: String { message }
 }
 
-extension ExpressPayError: Decodable {
+extension ExpressPayError: Codable {
     enum CodingKeys: String, CodingKey {
         case result
         case code = "error_code"

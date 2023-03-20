@@ -24,7 +24,7 @@ public struct ExpressPaySaleRedirectParams {
     public let termUrl: String
 }
 
-extension ExpressPaySaleRedirectParams: Decodable {
+extension ExpressPaySaleRedirectParams: Codable {
     enum CodingKeys: String, CodingKey {
         case paymentRequisites = "PaReq"
         case md = "MD"
@@ -37,5 +37,12 @@ extension ExpressPaySaleRedirectParams: Decodable {
         paymentRequisites = try container.decode(String.self, forKey: .paymentRequisites)
         termUrl = try container.decode(String.self, forKey: .termUrl)
         md = try container.decodeIfPresent(String.self, forKey: .md)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = try encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(paymentRequisites, forKey: .paymentRequisites)
+        try container.encode(termUrl, forKey: .termUrl)
+        try container.encode(md, forKey: .md)
     }
 }

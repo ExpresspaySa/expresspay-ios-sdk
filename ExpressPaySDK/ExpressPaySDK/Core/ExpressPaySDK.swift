@@ -43,6 +43,34 @@ import Foundation
  * The initialization can be done programmatically.
  *
  */
+
+/*
+ // Could not find module 'ExpressPaySDK' for target 'arm64-apple-ios-simulator'; found: arm64-apple-ios, at: /Volumes/EdfaPay/Codes/Github/ExpressPay/iOS/expresspay-ios-sdk-framework/ExpressPaySDK.framework/Modules/ExpressPaySDK.swiftmodule
+ 
+ 
+ // Archive Framework for Simulator
+ xcodebuild archive \
+ -scheme ExpressPaySDK \
+ -configuration Release \
+ -destination 'generic/platform=iOS Simulator' \
+ -archivePath './build/ExpressPaySDK.framework-iphonesimulator.xcarchive' \
+ SKIP_INSTALL=NO \
+ BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
+ 
+ 
+ // Archive Framework for iOS
+ xcodebuild archive \
+ -scheme ExpressPaySDK \
+ -configuration Release \
+ -destination 'generic/platform=iOS' \
+ -archivePath './build/ExpressPaySDK.framework-iphoneos.xcarchive' \
+ SKIP_INSTALL=NO \
+ BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
+ 
+ */
+
+public var ENABLE_DEBUG = false
+
 public final class ExpressPaySDK {
     
     static let shared = ExpressPaySDK()
@@ -61,6 +89,13 @@ public final class ExpressPaySDK {
     /// - Requires: Use this function for configure *ExpressPaySDK* in code
     public static func config(_ credendials: ExpressPayCredential) {
         shared._credentials = credendials
+        #if DEBUG
+        ENABLE_DEBUG = true
+        #endif
+    }
+    
+    public static func enableLogs(){
+        ENABLE_DEBUG = true
     }
     
     private init() { }

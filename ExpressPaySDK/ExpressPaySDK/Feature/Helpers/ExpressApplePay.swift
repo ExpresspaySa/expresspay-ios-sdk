@@ -214,10 +214,10 @@ private extension ExpressApplePay{
             log(label: "Error", object:"Missing or invalid apple pay 'merchant identifier'")
         }
         
-        if !(_order.amount > 0.99){
+        if !(_order.amount >= 0.10){
             valid = valid && false
-            errors.append("Missing or invalid amount should be greater than 0.99")
-            log(label: "Error", object:"Missing or invalid amount should be greater than 0.99")
+            errors.append("Missing or invalid amount should be greater than 0.09")
+            log(label: "Error", object:"Missing or invalid amount should be greater than 0.09")
         }
         
         if _order.currency.isEmpty{

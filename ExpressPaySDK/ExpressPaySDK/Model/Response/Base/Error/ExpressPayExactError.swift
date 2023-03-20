@@ -19,7 +19,7 @@ public struct ExpressPayExactError: Error {
     public let message: String
 }
 
-extension ExpressPayExactError: Decodable {
+extension ExpressPayExactError: Codable {
     enum CodingKeys: String, CodingKey {
         case code = "error_code"
         case message = "error_message"

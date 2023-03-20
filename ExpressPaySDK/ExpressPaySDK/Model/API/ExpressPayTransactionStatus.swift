@@ -10,7 +10,7 @@ import Foundation
 /// The transaction status types.
 /// 
 /// See *ExpressPayTransaction*
-public enum ExpressPayTransactionStatus: String, Decodable {
+public enum ExpressPayTransactionStatus: String, Codable {
     
     /// Failed or "0" status.
     case fail

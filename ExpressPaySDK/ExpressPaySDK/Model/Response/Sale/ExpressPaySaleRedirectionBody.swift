@@ -19,7 +19,7 @@ public struct ExpressPay3dsResponse{
     
 }
 
-extension ExpressPay3dsResponse: Decodable {
+extension ExpressPay3dsResponse: Codable {
     enum CodingKeys: String, CodingKey {
         case status = "result"
         case orderId = "order.id"
@@ -40,6 +40,19 @@ extension ExpressPay3dsResponse: Decodable {
         
         result = try? container.decode(Result.self, forKey: .status)
         gatewayRecommendation = try? container.decode(GatewayRecommendation.self, forKey: .gatewayRecommendation)
+    }
+    
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = try encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(result, forKey: .status)
+        try container.encode(orderId, forKey: .orderId)
+        try container.encode(transactionId, forKey: .transactionId)
+        try container.encode(ciphertext, forKey: .ciphertext)
+        try container.encode(nonce, forKey: .nonce)
+        try container.encode(tag, forKey: .tag)
+        try container.encode(gatewayRecommendation, forKey: .gatewayRecommendation)
+
     }
 }
 

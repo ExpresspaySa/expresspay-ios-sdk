@@ -28,6 +28,8 @@ fileprivate var _cardNumber:String?
 fileprivate var _txnId:String?
 class CardDetailViewController : UIViewController {
     
+    var onPresent:(() ->Void)?
+    
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var cardView: CreditCardFormView!
     @IBOutlet weak var txtCardHolderName: UITextField!
@@ -65,19 +67,27 @@ class CardDetailViewController : UIViewController {
     }()
     
     public override func viewDidLoad() {
+        super.viewDidLoad()
         print("viewDidLoad")
+        
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         
         self.lblAmount.text = _order.formatedAmountString()
         self.lblCurrency.text = Locale.current.localizedCurrencySymbol(forCurrencyCode: _order.currency)
         
         setupFormatters()
         btnSubmit.isEnabled = false
-        txtCardHolderName.becomeFirstResponder()
         
         txtCardHolderName.addDoneButtonOnKeyboard()
         txtCardNumber.addDoneButtonOnKeyboard()
         txtCardExpiry.addDoneButtonOnKeyboard()
         txtCardCVV.addDoneButtonOnKeyboard()
+        
+        if let _onPresent = onPresent{
+            _onPresent()
+        }
     }
     
     func setupFormatters(){
@@ -212,7 +222,7 @@ class CardDetailViewController : UIViewController {
         var valid = false
         if let y1 = expiry.year, let m1 = expiry.month,
            let y2 = UInt(year), let m2 = UInt(month){
-            valid = y1 >= y2 && m1 >= m2
+            valid = y1+m1 >= y2+m2
         }
         
         return valid
@@ -253,12 +263,15 @@ extension CardDetailViewController : ExpressPayAdapterDelegate{
         
         let saleOptions:ExpressPaySaleOptions? = nil //ExpressPaySaleOptions(channelId: "", recurringInit: false)
         
+        showLoading()
         saleAdapter.execute(order: _order,
                             card: _card,
                             payer: _payer,
                             termUrl3ds: ExpressPayProcessCompleteCallbackUrl,
                             options: saleOptions,
                             auth: false) { [weak self] (response) in
+            
+            hideLoading()
             
             guard let self = self else { return }
             
@@ -268,11 +281,10 @@ extension CardDetailViewController : ExpressPayAdapterDelegate{
                 switch result {
                 case .recurring(let recurringResult):
                     debugPrint(recurringResult)
-                    _onTransactionSuccess?(response, "Transaction ready for recurring")
+                    self.checkTransactionStatus(saleResponse: response, transactionId: recurringResult.transactionId)
                     
                 case .secure3d(let result3ds):
                     debugPrint(result3ds)
-                    _onTransactionSuccess?(response, "Transaction ready for secure3d")
                     self.openRedirect3Ds(termUrl: result3ds.redirectParams.termUrl,
                                          termUrl3Ds: "",
                                          redirectUrl: result3ds.redirectUrl,
@@ -285,17 +297,17 @@ extension CardDetailViewController : ExpressPayAdapterDelegate{
                     
                 case .decline(let declineResult):
                     debugPrint(declineResult)
-                    _onTransactionFailure?(response, declineResult.declineReason)
+                    self.checkTransactionStatus(saleResponse: response, transactionId: declineResult.transactionId)
                     
                 case .success(let successResult):
                     debugPrint(successResult)
-                    _onTransactionSuccess?(response, successResult)
+                    self.checkTransactionStatus(saleResponse: response, transactionId: successResult.transactionId)
                     
                 }
                                 
             case .error(let errorResult):
                 debugPrint(errorResult)
-                _onTransactionFailure?(response, errorResult.message)
+                _onTransactionFailure?(response, errorResult)
                 
             case .failure(let errorResult):
                 debugPrint(errorResult)
@@ -328,7 +340,6 @@ extension CardDetailViewController : ExpressPayAdapterDelegate{
             .setup(response: sale3dsRedirectResponse, onTransactionSuccess: { result in
                 if let txnId = result.transactionId{
                     self.checkTransactionStatus(saleResponse: response, transactionId: txnId)
-                    print("Checking transaction status for transaction id: \(txnId)")
                 }else{
                     _onTransactionFailure?(response, "Something went wrong (Transaction ID not returned on success response)")
                 }
@@ -351,12 +362,13 @@ extension CardDetailViewController : ExpressPayAdapterDelegate{
     }
     
     func checkTransactionStatus(saleResponse:ExpressPayResponse<ExpressPaySaleResult>, transactionId:String){
+        print("Checking transaction status for transaction id: \(transactionId)")
         if let cardNumber = _cardNumber, let txn = _txnId{
             getTransactionDetailAdapter.execute(
                 transactionId: txn,
                 payerEmail: _payer.email,
                 cardNumber: cardNumber) { response in
-                    
+                
                     switch response {
                     case .result(let result):
                         
@@ -376,7 +388,7 @@ extension CardDetailViewController : ExpressPayAdapterDelegate{
                         
                     case .failure(let errorResult):
                         debugPrint(errorResult)
-                        _onTransactionSuccess?(saleResponse, response)
+                        _onTransactionFailure?(saleResponse, errorResult)
                         
                     }
             }
@@ -396,6 +408,7 @@ public class ExpressCardPay{
         }else if let viewController = _target{
             viewController.present(vc, animated: true)
         }
+        vc.onPresent = _onPresent
         return vc
     }
     
