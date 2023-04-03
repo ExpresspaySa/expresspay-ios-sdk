@@ -18,7 +18,7 @@ public struct ExpressPayCreditvoidSuccess: ExpressPayResultProtocol {
     public let transactionId: String
 }
 
-extension ExpressPayCreditvoidSuccess: Decodable {
+extension ExpressPayCreditvoidSuccess: Codable {
     enum CodingKeys: String, CodingKey {
         case action, result, status
         case orderId = "order_id"
@@ -33,5 +33,15 @@ extension ExpressPayCreditvoidSuccess: Decodable {
         orderId = try container.decode(String.self, forKey: .orderId)
         transactionId = try container.decode(String.self, forKey: .transactionId)
         status = try container.decodeIfPresent(ExpressPayStatus.self, forKey: .status) ?? .undefined
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = try encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(action, forKey: .action)
+        try container.encode(result, forKey: .result)
+        try container.encode(orderId, forKey: .orderId)
+        try container.encode(transactionId, forKey: .transactionId)
+        try container.encodeIfPresent(status, forKey: .status)
     }
 }

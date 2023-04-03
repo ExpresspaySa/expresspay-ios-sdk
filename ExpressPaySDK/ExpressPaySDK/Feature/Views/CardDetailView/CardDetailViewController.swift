@@ -118,8 +118,9 @@ class CardDetailViewController : UIViewController {
     @IBAction func numberTextChanged(_ sender: UITextField) {
         onChange()
         sender.textColor = UIColor.black
-        if cardNumberFormatter.unformat(sender.text)?.count == 16{
-            if isValidCardNumber(){
+        let number = cardNumberFormatter.unformat(sender.text)
+        if number?.count == 16{
+            if isValidCardNumber(number: number){
                 txtCardExpiry.becomeFirstResponder()
             }else{
                 cardView.shake(duration: 1)
@@ -170,7 +171,7 @@ class CardDetailViewController : UIViewController {
     
     func onChange(){
         let name = txtCardHolderName.text
-        let number = cardExpirationFormatter.unformat(txtCardNumber.text)
+        let number = cardExpirationFormatter.unformat(txtCardNumber.text) ?? ""
         let expiry = cardxExpiry()
         let cvv = cardExpirationFormatter.unformat(txtCardCVV.text)
         
@@ -183,7 +184,8 @@ class CardDetailViewController : UIViewController {
             cvc: cvv
         )
         
-        btnSubmit.isEnabled = isValidExpiry() && isValidCardNumber() && isValidCVC()
+        let unformateNumber = number.replacingOccurrences(of: " ", with: "")
+        btnSubmit.isEnabled = isValidExpiry() && isValidCardNumber(number: unformateNumber) && isValidCVC()
     }
     
     func cardxExpiry() -> (month:UInt?, year:UInt?){
@@ -204,8 +206,8 @@ class CardDetailViewController : UIViewController {
         return (0,0)
     }
     
-    func isValidCardNumber() -> Bool{
-        return cardView.cardBrand != .NONE
+    func isValidCardNumber(number:String?) -> Bool{
+        return (number ?? "").count == 16 || cardView.cardBrand != .NONE
     }
     
     func isValidExpiry() -> Bool{
@@ -256,7 +258,8 @@ extension CardDetailViewController : ExpressPayAdapterDelegate{
             return
         }
         
-        _cardNumber = number
+        _cardNumber = number.replacingOccurrences(of: " ", with: "")
+        
         
         let _card = ExpressPayCard(number: number, expireMonth: Int(expiryMonth), expireYear: Int(expiryYear + 2000), cvv: cvv)
         

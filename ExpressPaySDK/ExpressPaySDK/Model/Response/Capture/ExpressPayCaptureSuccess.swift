@@ -30,7 +30,7 @@ public struct ExpressPayCaptureSuccess: DetailsExpressPayResultProtocol {
     public let transactionId: String
 }
 
-extension ExpressPayCaptureSuccess: Decodable {
+extension ExpressPayCaptureSuccess: Codable {
     enum CodingKeys: String, CodingKey {
         case descriptor
         case transactionDate = "trans_date"
@@ -57,5 +57,20 @@ extension ExpressPayCaptureSuccess: Decodable {
         orderAmount = Double(try container.decode(String.self, forKey: .orderAmount)) ?? 0
         
         descriptor = try container.decodeIfPresent(String.self, forKey: .descriptor)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = try encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(action, forKey: .action)
+        try container.encode(status, forKey: .status)
+        try container.encode(result, forKey: .result)
+        try container.encode(orderId, forKey: .orderId)
+        try container.encode(transactionId, forKey: .transactionId)
+        try container.encode(orderCurrency, forKey: .orderCurrency)
+        
+        try container.encode(orderAmount, forKey: .orderAmount)
+        try container.encode(ExpressPayDateFormatter.string(from: transactionDate), forKey: .transactionDate)
+        
+        try container.encode(descriptor, forKey: .descriptor)
     }
 }
