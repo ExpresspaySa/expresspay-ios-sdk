@@ -247,6 +247,7 @@
 		3085D5272989B55F00AEFE32 /* AKMaskFieldPatternCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3085D5122989B55F00AEFE32 /* AKMaskFieldPatternCharacter.swift */; };
 		3085D5282989B55F00AEFE32 /* AKMaskFieldStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3085D5132989B55F00AEFE32 /* AKMaskFieldStatus.swift */; };
 		3085D5292989B55F00AEFE32 /* AKMaskFieldStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3085D5132989B55F00AEFE32 /* AKMaskFieldStatus.swift */; };
+		308B683129FEB078000EF281 /* PrepareForDevice.sh in Resources */ = {isa = PBXBuildFile; fileRef = 308B683029FEB078000EF281 /* PrepareForDevice.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -398,6 +399,7 @@
 		3085D5112989B55F00AEFE32 /* AKMaskFieldBlockCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMaskFieldBlockCharacter.swift; sourceTree = "<group>"; };
 		3085D5122989B55F00AEFE32 /* AKMaskFieldPatternCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMaskFieldPatternCharacter.swift; sourceTree = "<group>"; };
 		3085D5132989B55F00AEFE32 /* AKMaskFieldStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKMaskFieldStatus.swift; sourceTree = "<group>"; };
+		308B683029FEB078000EF281 /* PrepareForDevice.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = PrepareForDevice.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,6 +424,7 @@
 		3044D89629827AFB00F81550 = {
 			isa = PBXGroup;
 			children = (
+				308B683029FEB078000EF281 /* PrepareForDevice.sh */,
 				3044D8A229827AFB00F81550 /* ExpressPaySDK */,
 				3044D8AE29827AFB00F81550 /* ExpressPaySDKTests */,
 				3044D8A129827AFB00F81550 /* Products */,
@@ -1046,6 +1049,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3085D5052989B52B00AEFE32 /* CardDetailViewController.xib in Resources */,
+				308B683129FEB078000EF281 /* PrepareForDevice.sh in Resources */,
 				30787E68298A466A0008631C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1354,7 +1358,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 0.0.4;
+				CURRENT_PROJECT_VERSION = 0.0.5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1373,7 +1377,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.0.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1418,7 +1422,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 0.0.4;
+				CURRENT_PROJECT_VERSION = 0.0.5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1431,7 +1435,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.0.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1455,7 +1459,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0.0.4;
+				CURRENT_PROJECT_VERSION = 0.0.5;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2H7JEC8468;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1475,7 +1479,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.0.5;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.expresspay.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1501,7 +1505,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0.0.4;
+				CURRENT_PROJECT_VERSION = 0.0.5;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 2H7JEC8468;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1521,7 +1525,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.expresspay.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

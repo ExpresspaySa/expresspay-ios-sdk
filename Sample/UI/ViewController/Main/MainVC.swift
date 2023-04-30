@@ -15,12 +15,15 @@ final class MainVC: UIViewController {
         
     }
     
-    @IBAction func btnPayWithCard(_ sender: Any) {        
+    @IBAction func btnPayWithCard(_ sender: Any) {
+        
+        // Show your app loading
         ExpressPayPublicIP { ip, error in
+            // Hide your app loading
             if let ip_ = ip{
                 self.doTransaction(ip: ip_)
             }else{
-                debugPrint("Error while getting your network public ip.\n -- > Exception:(\(error.debugDescription ?? ""))")
+                debugPrint("Error while getting your network public ip.\n --> Exception:(\(error.debugDescription ?? ""))")
             }
         }
         

@@ -406,12 +406,13 @@ public class ExpressCardPay{
     
     func start() -> CardDetailViewController{
         let vc = CardDetailViewController(nibName: "CardDetailViewController", bundle: Bundle(for: CardDetailViewController.self))
+        vc.onPresent = _onPresent
+        
         if let navigationController = _target as? UINavigationController{
             navigationController.pushViewController(vc, animated: true)
         }else if let viewController = _target{
             viewController.present(vc, animated: true)
         }
-        vc.onPresent = _onPresent
         return vc
     }
     

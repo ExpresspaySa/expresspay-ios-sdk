@@ -117,6 +117,19 @@ extension UIViewController{
             loadings.append(alert)
         }
     }
+    
+    func confirmAlert(title:String, onAction: @escaping (Bool) -> Void){
+        let alert = UIAlertController(title: nil, message: title, preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: "No", style: .destructive, handler: { action in
+            onAction(false)
+        }))
+        alert.addAction(UIAlertAction.init(title: "Yes", style: .destructive, handler: { action in
+            onAction(true)
+        }))
+        present(alert, animated: true){
+            
+        }
+    }
 }
 
 func hideLoading(){

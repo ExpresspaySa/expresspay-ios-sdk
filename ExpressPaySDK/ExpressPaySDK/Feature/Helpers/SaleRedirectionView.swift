@@ -15,6 +15,8 @@ let ExpressPayProcessCompleteCallbackUrl = "https://expresspay.sa/process-comple
 fileprivate var response3ds:ExpressPay3dsResponse?
 
 public class SaleRedirectionView : WKWebView{
+    var viewController:Secure3DSVC? = nil
+    
     var onLoading:((Bool) -> Void)? = nil
     private var logs:Bool = false
     private var response:ExpressPaySaleRedirect!
@@ -112,6 +114,10 @@ extension SaleRedirectionView : WKNavigationDelegate{
         if url.lowercased().starts(with: "https://pay.expresspay.sa/interaction/"){
             
         }
+    
+        if url.lowercased().contains("callbackinterface"){
+            webViewLoading(true)
+        }
         
         if url.lowercased().starts(with: "https://api.expresspay.sa/verify/"),
            let body = navigationAction.request.httpBody{
@@ -137,12 +143,13 @@ extension SaleRedirectionView : WKNavigationDelegate{
     }
     
     private func operationCompleted(result:ExpressPay3dsResponse){
+        webViewLoading(false)
         if result.result == .success{
-            sale3dsViewController.dismiss(animated: true) {
+            self.sale3dsViewController.dismiss(animated: true) {
                 self.onTransactionSuccess?(result)
             }
         }else if result.result == .failure{
-            sale3dsViewController.dismiss(animated: true) {
+            self.sale3dsViewController.dismiss(animated: true) {
                 self.onTransactionFailure?(result)
             }
         }
@@ -218,7 +225,8 @@ extension SaleRedirectionView : WKUIDelegate{
 final class Secure3DSVC : UIViewController{
     var content:SaleRedirectionView?
     var response:ExpressPaySaleRedirect!
-    private let loading = UIActivityIndicatorView()
+    let loading = UIActivityIndicatorView()
+    
     
     class func with(content:SaleRedirectionView, response:ExpressPaySaleRedirect) -> Secure3DSVC{
         let vc = Secure3DSVC()
@@ -268,12 +276,12 @@ final class Secure3DSVC : UIViewController{
     func loading(isLoading:Bool){
         if isLoading == false{
             Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
-                self.loading.isHidden = !isLoading
+                self.loading.stopAnimating()
                 timer.invalidate()
             }
             
         }else{
-            self.loading.isHidden = !isLoading
+            self.loading.startAnimating()
         }
     }
     
@@ -281,8 +289,6 @@ final class Secure3DSVC : UIViewController{
         
     }
     
-    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
-        return shouldDismiss
-    }
+    
 }
 

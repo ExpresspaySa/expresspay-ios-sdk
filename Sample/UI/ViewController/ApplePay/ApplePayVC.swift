@@ -136,7 +136,7 @@ private extension ApplePayVC {
         ExpressApplePay()
             .set(order: order)
             .set(payer: payer)
-            .set(applePayMerchantID: "EXPRESS_APPLEPAY_MERCHANT_ID")
+            .set(applePayMerchantID: EXPRESS_APPLEPAY_MERCHANT_ID)
             .enable(logs: true)
             .on(authentication: { auth in
                 debugPrint("onAuthentication: \(String(data: auth.token.paymentData, encoding: .utf8)!)")
