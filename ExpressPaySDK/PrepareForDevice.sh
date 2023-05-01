@@ -2,10 +2,10 @@
 
 DEST='generic/platform=iOS'
 
-if [ $2 == 'SIM' ]
-then
-DEST='generic/platform=iOS Simulator'
-fi
+#if [ $2 == 'SIM' ]
+#then
+#DEST='generic/platform=iOS Simulator'
+#fi
 
 xcodebuild archive \
 -scheme ExpressPaySDK \
@@ -19,7 +19,7 @@ CURRENT_PROJECT_VERSION=$1
 
 # Copy update/generated framework to the flutter plugin
 echo -e "${bold}Copying update/generated framework to the flutter plugin"
-echo -e "--> /Volumes/EdfaPay/Codes/Github/ExpressPay/Flutter/expresspay-flutter-sdk/ios/ExpressPaySDK.framework"
+echo -e "--> /Volumes/EdfaPay/Codes/Github/ExpressPay/Flutter/expresspay-flutter-sdk/ios"
 echo -e "\n"
 cp -R ./build/ExpressPaySDK.framework-iphoneos.xcarchive/Products/Library/Frameworks/ExpressPaySDK.framework \
 /Volumes/EdfaPay/Codes/Github/ExpressPay/Flutter/expresspay-flutter-sdk/ios/
