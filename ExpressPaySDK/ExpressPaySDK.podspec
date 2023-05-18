@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
   #
   
   spec.name         = "ExpressPaySDK"
-  spec.version      = "0.0.4"
+  spec.version      = "0.0.7"
   spec.summary      = "ExpressPaySDK is an payment SDK library written in Swift."
   
   # This description is used to generate tags and improve search results.
@@ -29,8 +29,8 @@ Pod::Spec.new do |spec|
   ExpressPay iOS SDK was developed and designed with one purpose: to help the iOS developers easily integrate the ExpressPay API Payment Platform for a specific merchant.
                    DESC
 
-  spec.homepage     = "https://expressPay.com"
-  spec.screenshots  = "https://github.com/expressPay/expressPay-ios-sdk/blob/main/media/sale.gif?raw=true", "https://github.com/expressPay/expressPay-ios-sdk/blob/main/media/recurring-sale.gif?raw=true", "https://github.com/expressPay/expressPay-ios-sdk/blob/main/media/capture.gif?raw=true", "https://github.com/expressPay/expressPay-ios-sdk/blob/main/media/creditvoid.gif?raw=true", "https://github.com/expressPay/expressPay-ios-sdk/blob/main/media/get-trans-status.gif?raw=true", "https://github.com/expressPay/expressPay-ios-sdk/blob/main/media/get-trans-details.gif?raw=true"
+  spec.homepage     = "https://expresspay.sa"
+  spec.screenshots  = "https://github.com/ExpresspaySa/expresspay-ios-sdk-source/blob/main/media/sale.png?raw=true", "https://github.com/ExpresspaySa/expresspay-ios-sdk-source/blob/main/media/recurring-sale.png?raw=true", "https://github.com/ExpresspaySa/expresspay-ios-sdk-source/blob/main/media/capture.png?raw=true", "https://github.com/ExpresspaySa/expresspay-ios-sdk-source/blob/main/media/creditvoid.png?raw=true", "https://github.com/ExpresspaySa/expresspay-ios-sdk-source/blob/main/media/get-trans-status.png?raw=true", "https://github.com/ExpresspaySa/expresspay-ios-sdk-source/blob/main/media/get-trans-details.png?raw=true"
   
   
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -72,7 +72,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/expressPay/expressPay-ios-sdk.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/ExpresspaySa/expresspay-ios-sdk-pod.git", :tag => "#{spec.version}" }
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #

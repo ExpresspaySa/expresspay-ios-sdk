@@ -18,9 +18,7 @@ xcodebuild archive \
 -destination 'generic/platform=iOS Simulator' \
 -archivePath './build/ExpressPaySDK.framework-iphonesimulator.xcarchive' \
 SKIP_INSTALL=NO \
-BUILD_LIBRARIES_FOR_DISTRIBUTION=YES \
-MARKETING_VERSION=0.0.6 \
-CURRENT_PROJECT_VERSION=0.0.6
+BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
 
 
 // Archive Framework for iOS
@@ -30,9 +28,7 @@ xcodebuild archive \
 -destination 'generic/platform=iOS' \
 -archivePath './build/ExpressPaySDK.framework-iphoneos.xcarchive' \
 SKIP_INSTALL=NO \
-BUILD_LIBRARIES_FOR_DISTRIBUTION=YES \
-MARKETING_VERSION=0.0.7 \
-CURRENT_PROJECT_VERSION=0.0.7
+BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
 
 */
 
@@ -45,6 +41,5 @@ FOUNDATION_EXPORT double ExpressPaySDKVersionNumber = 2;
 FOUNDATION_EXPORT const unsigned char ExpressPaySDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like
-
 
 
