@@ -15,7 +15,6 @@ import ExpressPaySDK
 ClientKey b5abdab4-5c46-11ed-a7be-8e03e789c25f
 ClientPass: f922737e44c04144f8abb092f1f31049
 PaymentUrl: https://api.expresspay.sa/post
- 
 */
 
 @main
