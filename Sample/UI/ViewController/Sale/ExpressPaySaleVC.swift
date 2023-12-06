@@ -115,7 +115,7 @@ extension ExpressPaySaleVC {
 private extension ExpressPaySaleVC {
     func randomize(isAll: Bool) {
         tfOrderId.text = UUID().uuidString
-        tfOrderAmount.text = String(format: "%.2f", Double.random(in: 0...10))
+        tfOrderAmount.text = String(format: "%.2f", Double.random(in: 0...1.1))
         tfOrderDescription.text = faker.lorem.sentences()
         tfOrderCurrencyCode.text = ["SAR"].randomElement()
         
