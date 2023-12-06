@@ -27,6 +27,16 @@ final class ExpressPayGetTransStatusVC: TransactionViewController {
     // MARK: - Private Methods
     
     private func executeRequest() {
+        
+        ExpressPaySDK.config(
+            ExpressPayCredential(
+                clientKey: TEST_MERCHANT_KEY,
+                clientPass: TEST_MERCHANT_PASSWORD,
+                paymentUrl: EXPRESSPAY_PAYMENT_URL
+            )
+        )
+        
+        
         guard let selectedTransaction = selectedTransaction else { return }
         
         getTransactionStatusAdapter.execute(transactionId: selectedTransaction.id,

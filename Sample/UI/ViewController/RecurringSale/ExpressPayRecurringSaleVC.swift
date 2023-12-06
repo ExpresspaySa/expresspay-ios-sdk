@@ -65,6 +65,16 @@ final class ExpressPayRecurringSaleVC: TransactionViewController {
     }
     
     private func executeRequest(isAuth: Bool) {
+        
+        ExpressPaySDK.config(
+            ExpressPayCredential(
+                clientKey: TEST_MERCHANT_KEY,
+                clientPass: TEST_MERCHANT_PASSWORD,
+                paymentUrl: EXPRESSPAY_PAYMENT_URL
+            )
+        )
+        
+        
         guard let selectedTransaction = selectedTransaction else { return }
         
         let amount = Double(tfOrderAmount.text ?? "") ?? 0

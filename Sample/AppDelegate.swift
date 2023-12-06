@@ -24,16 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        // https://github.com/yassram/YRPayment
-        let expressPayCredential = ExpressPayCredential(
-            clientKey: EXPRESSPAY_MERCHANT_KEY,
-            clientPass: EXPRESSPAY_MERCHANT_PASSWORD,
-            paymentUrl: "https://api.expresspay.sa/post"
-        )
-        
-        ExpressPaySDK.config(expressPayCredential)
-        
         return true
     }
 }

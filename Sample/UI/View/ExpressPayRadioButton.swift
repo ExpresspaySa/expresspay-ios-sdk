@@ -30,7 +30,7 @@ final class ExpressPayRadioButtonContainer {
     
     var selectedButton: ExpressPayRadioButton? {
         didSet {
-            if oldValue != selectedButton { didSelectButton?(selectedButton) }
+            didSelectButton?(selectedButton)
         }
     }
     

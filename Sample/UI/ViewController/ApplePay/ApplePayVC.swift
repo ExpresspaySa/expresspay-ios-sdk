@@ -65,6 +65,14 @@ final class ApplePayVC: BaseViewController {
 
 extension ApplePayVC {
     override func viewDidLoad() {
+        ExpressPaySDK.config(
+            ExpressPayCredential(
+                clientKey: LIVE_MERCHANT_KEY,
+                clientPass: LIVE_MERCHANT_PASSWORD,
+                paymentUrl: EXPRESSPAY_PAYMENT_URL
+            )
+        )
+        
         super.viewDidLoad()
     }
 }
@@ -136,7 +144,7 @@ private extension ApplePayVC {
         ExpressApplePay()
             .set(order: order)
             .set(payer: payer)
-            .set(applePayMerchantID: EXPRESS_APPLEPAY_MERCHANT_ID)
+            .set(applePayMerchantID: LIVE_APPLEPAY_MERCHANT_ID)
             .enable(logs: true)
             .on(authentication: { auth in
                 debugPrint("onAuthentication: \(String(data: auth.token.paymentData, encoding: .utf8)!)")

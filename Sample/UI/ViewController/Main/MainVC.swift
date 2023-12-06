@@ -31,6 +31,14 @@ final class MainVC: UIViewController {
     
     func doTransaction(ip:String){
         
+        ExpressPaySDK.config(
+            ExpressPayCredential(
+                clientKey: LIVE_MERCHANT_KEY,
+                clientPass: LIVE_MERCHANT_PASSWORD,
+                paymentUrl: EXPRESSPAY_PAYMENT_URL
+            )
+        )
+        
         let payer = ExpressPayPayer(
             firstName: "Zohaib", lastName: "Kambrani", address: "a2zzuhaib@gmail.com",
             country: "SA", city: "Riyadh", zip: "123221",
@@ -39,7 +47,7 @@ final class MainVC: UIViewController {
         
         let order = ExpressPaySaleOrder(
             id: UUID().uuidString,
-            amount: 0.01,
+            amount: 0.10,
             currency: "SAR",
             description: "Test Order"
         )
@@ -77,13 +85,13 @@ final class MainVC: UIViewController {
                 debugPrint(result)
                 debugPrint(err)
                 cardDetailVC?.dismiss(animated: true)
-                self.show(message: "Failure")
+                self.show(title: "Failure", message: "\(result)\n\(err)")
             })
             .on(transactionSuccess: { res, data in
                 debugPrint(res)
                 debugPrint(data)
                 cardDetailVC?.dismiss(animated: true)
-                self.show(message: "Success")
+                self.show(title: "Success", message: "\(res)\n\(data)")
 
             }).initialize(
                 target: self,
@@ -97,8 +105,8 @@ final class MainVC: UIViewController {
             )
     }
     
-    func show(message:String){
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+    func show(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .destructive))
                                       
         present(alert, animated: true)

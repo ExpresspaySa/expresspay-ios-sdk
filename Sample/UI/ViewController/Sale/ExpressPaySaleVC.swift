@@ -10,6 +10,7 @@ import Fakery
 import ExpressPaySDK
 
 final class ExpressPaySaleVC: BaseViewController {
+    var customCard:ExpressPayCard? = nil
     
     // MARK: - IBOutlets
     
@@ -38,17 +39,21 @@ final class ExpressPaySaleVC: BaseViewController {
     @IBOutlet private weak var btnFailureCaptureCard: ExpressPayRadioButton!
     @IBOutlet private weak var btnSuccess3dSecureSaleCard: ExpressPayRadioButton!
     @IBOutlet private weak var btnFailure3dSecureSaleCard: ExpressPayRadioButton!
+    @IBOutlet private weak var btnCustomEntryCard: ExpressPayRadioButton!
     
     @IBOutlet private weak var swtInitRecurringSale: UISwitch!
     @IBOutlet private weak var tfChannelId: UITextField!
     
     // MARK: - Private Properties
     
-    private lazy var cardsContainer = ExpressPayRadioButtonContainer(btnSuccessSaleCard,
-                                                                    btnFailueSaleCard,
-                                                                    btnFailureCaptureCard,
-                                                                    btnSuccess3dSecureSaleCard,
-                                                                    btnFailure3dSecureSaleCard)
+    private lazy var cardsContainer = ExpressPayRadioButtonContainer(
+        btnSuccessSaleCard,
+        btnFailueSaleCard,
+        btnFailureCaptureCard,
+        btnSuccess3dSecureSaleCard,
+        btnFailure3dSecureSaleCard,
+        btnCustomEntryCard
+    )
     
     private lazy var saleAdapter: ExpressPaySaleAdapter = {
         let adapter = ExpressPayAdapterFactory().createSale()
@@ -84,8 +89,24 @@ final class ExpressPaySaleVC: BaseViewController {
 extension ExpressPaySaleVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         cardsContainer.selectButton(at: 0)
+        cardsContainer.didSelectButton = { self.onCustomCardSelected(button: $0) }
+    }
+    
+
+    func onCustomCardSelected(button:ExpressPayRadioButton?){
+        if button == self.btnCustomEntryCard{
+            let vc = CardDetailViewController(nibName: "CardDetailViewController", bundle: Bundle(for: CardDetailViewController.self))
+            vc.amount = self.tfOrderAmount.text ?? ""
+            vc.currency = self.tfOrderCurrencyCode.text ?? ""
+            vc.onSubmitCardDetailOnly = { card in
+                self.customCard = card
+            }
+            self.present(vc, animated: true)
+        }else{
+            self.customCard = nil
+        }
+        
     }
 }
 
@@ -135,6 +156,16 @@ private extension ExpressPaySaleVC {
     }
     
     func executeRequest(isAuth: Bool) {
+        
+        ExpressPaySDK.config(
+            ExpressPayCredential(
+                clientKey: TEST_MERCHANT_KEY,
+                clientPass: TEST_MERCHANT_PASSWORD,
+                paymentUrl: EXPRESSPAY_PAYMENT_URL
+            )
+        )
+        
+            
         guard let selectedCardIndex = cardsContainer.selectedIndex else { return }
         
         let order = ExpressPaySaleOrder(id: tfOrderId.text ?? "",
@@ -142,7 +173,7 @@ private extension ExpressPaySaleVC {
                                        currency: tfOrderCurrencyCode.text ?? "",
                                        description: tfOrderDescription.text ?? "")
         
-        let card = getCard(at: selectedCardIndex)
+        let card = customCard ?? getCard(at: selectedCardIndex)
         
         let payerOptions = ExpressPayPayerOptions(middleName: tfPayerMiddleName.text,
                                                  birthdate: Foundation.Date.formatter.date(from: tfPayerBirthday.text ?? ""),
@@ -166,7 +197,7 @@ private extension ExpressPaySaleVC {
         let transaction = ExpressPayTransactionStorage.Transaction(payerEmail: payer.email,
                                                                   cardNumber: card.number)
         
-        let termUrl3ds = "https://webhook.site/85cedd75-7a4b-42d7-a03f-a48683ea17c4"
+        let termUrl3ds = "https://expresspay.sa/process-completed"
         
         saleAdapter.execute(order: order,
                             card: card,
@@ -211,9 +242,11 @@ private extension ExpressPaySaleVC {
         SaleRedirectionView()
             .setup(response: response, onTransactionSuccess: { result in
                 print("onTransactionSuccess: \(result)")
+                self.show(title: "Success", message: "\(result)")
                 
             }, onTransactionFailure: { result in
                 print("onTransactionFailure: \(result)")
+                self.show(title: "Failure", message: "\(result)")
                 
             })
             .enableLogs()
@@ -222,6 +255,7 @@ private extension ExpressPaySaleVC {
                 
             }, onError: { error in
                 print("onError: \(error)")
+                self.show(title: "Error", message: error.description)
                 
             })
 
@@ -237,5 +271,12 @@ private extension ExpressPaySaleVC {
         case 4: return ExpressPayTestCard.secure3dFailure
         default: return ExpressPayTestCard.saleSuccess
         }
+    }
+    
+    func show(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive))
+                                      
+        present(alert, animated: true)
     }
 }

@@ -1,16 +1,16 @@
 PODS:
-  - ExpressPaySDK (1.1.1)
+  - ExpressPaySDK (1.1.5)
 
 DEPENDENCIES:
-  - ExpressPaySDK
+  - ExpressPaySDK (from `../expresspay-ios-sdk-pod`)
 
-SPEC REPOS:
-  trunk:
-    - ExpressPaySDK
+EXTERNAL SOURCES:
+  ExpressPaySDK:
+    :path: "../expresspay-ios-sdk-pod"
 
 SPEC CHECKSUMS:
-  ExpressPaySDK: e032f322a927b94ae64f1993ae669fd1df13ef13
+  ExpressPaySDK: 8785036a37e92a32541307aed3caafcc925b3f21
 
-PODFILE CHECKSUM: 0e89a2bcb142341505e9e0fd69d3bdd9195605d3
+PODFILE CHECKSUM: 9a60ba5bd7b08b624b714e8866409fb9db828d6f
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0
