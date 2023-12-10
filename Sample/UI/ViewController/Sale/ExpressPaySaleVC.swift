@@ -29,6 +29,12 @@ final class ExpressPaySaleVC: BaseViewController {
     @IBOutlet private weak var tfPayerPhone: UITextField!
     @IBOutlet private weak var tfPayerIpAddress: UITextField!
     
+    
+    @IBOutlet weak var tfCardHolderName: UITextField!
+    @IBOutlet weak var tfCardNumber: UITextField!
+    @IBOutlet weak var tfCardExpiry: UITextField!
+    @IBOutlet weak var tfCardCVV: UITextField!
+
     @IBOutlet private weak var tfPayerMiddleName: UITextField!
     @IBOutlet private weak var tfPayerAddress2: UITextField!
     @IBOutlet private weak var tfPayerState: UITextField!
@@ -90,17 +96,40 @@ extension ExpressPaySaleVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         cardsContainer.selectButton(at: 0)
-        cardsContainer.didSelectButton = { self.onCustomCardSelected(button: $0) }
+        cardsContainer.didSelectButton = {
+            self.onCardSelected(button: $0)
+        }
+        
+        cardsContainer.didSelectIndex = {
+            if $0 ?? 0 < 5{
+                let card = self.getCard(at: $0!)
+                self.tfCardHolderName.text = "Test Card"
+                self.tfCardNumber.text = card.number
+                self.tfCardExpiry.text = "\(card.expireMonth)/\(card.expireYear)"
+                self.tfCardCVV.text = card.cvv
+            }else{
+                self.tfCardHolderName.text = ""
+                self.tfCardNumber.text = ""
+                self.tfCardExpiry.text = ""
+                self.tfCardCVV.text = ""
+                self.customCard = nil
+            }
+        }
+        cardsContainer.didSelectIndex!(0)
     }
     
 
-    func onCustomCardSelected(button:ExpressPayRadioButton?){
+    func onCardSelected(button:ExpressPayRadioButton?){
         if button == self.btnCustomEntryCard{
             let vc = CardDetailViewController(nibName: "CardDetailViewController", bundle: Bundle(for: CardDetailViewController.self))
             vc.amount = self.tfOrderAmount.text ?? ""
             vc.currency = self.tfOrderCurrencyCode.text ?? ""
             vc.onSubmitCardDetailOnly = { card in
                 self.customCard = card
+                self.tfCardHolderName.text = ""
+                self.tfCardNumber.text = card.number
+                self.tfCardExpiry.text = "\(card.expireMonth)/\(card.expireYear)"
+                self.tfCardCVV.text = card.cvv
             }
             self.present(vc, animated: true)
         }else{
@@ -114,7 +143,7 @@ extension ExpressPaySaleVC {
 
 private extension ExpressPaySaleVC {
     func randomize(isAll: Bool) {
-        tfOrderId.text = UUID().uuidString
+        tfOrderId.text = Date().timeStamp()
         tfOrderAmount.text = String(format: "%.2f", Double.random(in: 0...1.1))
         tfOrderDescription.text = faker.lorem.sentences()
         tfOrderCurrencyCode.text = ["SAR"].randomElement()
@@ -159,8 +188,8 @@ private extension ExpressPaySaleVC {
         
         ExpressPaySDK.config(
             ExpressPayCredential(
-                clientKey: TEST_MERCHANT_KEY,
-                clientPass: TEST_MERCHANT_PASSWORD,
+                clientKey: MERCHANT_KEY,
+                clientPass: MERCHANT_PASSWORD,
                 paymentUrl: EXPRESSPAY_PAYMENT_URL
             )
         )

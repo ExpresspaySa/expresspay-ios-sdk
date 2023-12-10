@@ -30,8 +30,8 @@ final class ExpressPayGetTransStatusVC: TransactionViewController {
         
         ExpressPaySDK.config(
             ExpressPayCredential(
-                clientKey: TEST_MERCHANT_KEY,
-                clientPass: TEST_MERCHANT_PASSWORD,
+                clientKey: MERCHANT_KEY,
+                clientPass: MERCHANT_PASSWORD,
                 paymentUrl: EXPRESSPAY_PAYMENT_URL
             )
         )

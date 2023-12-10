@@ -17,6 +17,12 @@ extension UIColor {
     }
 }
 
+extension Date{
+    func timeStamp() -> String{
+        return Date().timeIntervalSince1970.description.replacingOccurrences(of: ".", with: "")
+    }
+}
+
 extension Date {
     static var formatter: DateFormatter {
         let formatter = DateFormatter()

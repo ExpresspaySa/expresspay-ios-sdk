@@ -22,10 +22,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sYh-Y4-Y8g">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1817.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2046"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="huC-mp-qP1">
-                                                <rect key="frame" x="16" y="16" width="382" height="1785.5"/>
+                                                <rect key="frame" x="16" y="16" width="382" height="2014"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FxJ-vr-Iwk" customClass="ExpressPayButton" customModule="Sample" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
@@ -150,8 +150,44 @@
                                                             </stackView>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="9C8-Uz-Blm">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Nib-8c-jhW">
                                                         <rect key="frame" x="0.0" y="829" width="382" height="196.5"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Detail:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nrj-N9-w1T">
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Eif-1E-b6i">
+                                                                <rect key="frame" x="0.0" y="36.5" width="382" height="160"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card Holder Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uRo-z2-nh7">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="21U-6b-ZJL">
+                                                                        <rect key="frame" x="0.0" y="42" width="382" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card Expiry" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zo0-7q-gy7">
+                                                                        <rect key="frame" x="0.0" y="84" width="382" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CVV" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ejh-09-sQz">
+                                                                        <rect key="frame" x="0.0" y="126" width="382" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="9C8-Uz-Blm">
+                                                        <rect key="frame" x="0.0" y="1057.5" width="382" height="196.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payer Options:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zA1-j7-UEk">
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
@@ -187,7 +223,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="N53-Op-Ehg">
-                                                        <rect key="frame" x="0.0" y="1057.5" width="382" height="236.5"/>
+                                                        <rect key="frame" x="0.0" y="1286" width="382" height="236.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card Type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFz-gC-uqQ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
@@ -227,7 +263,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="uiO-AV-mAy">
-                                                        <rect key="frame" x="0.0" y="1326" width="382" height="109.5"/>
+                                                        <rect key="frame" x="0.0" y="1554.5" width="382" height="109.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Optional:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j61-jX-QB2">
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
@@ -262,7 +298,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="XJS-9W-16c">
-                                                        <rect key="frame" x="0.0" y="1467.5" width="382" height="66.5"/>
+                                                        <rect key="frame" x="0.0" y="1696" width="382" height="66.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wfs-CD-RcZ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
@@ -292,7 +328,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Wj0-65-RNW">
-                                                        <rect key="frame" x="0.0" y="1566" width="382" height="219.5"/>
+                                                        <rect key="frame" x="0.0" y="1794.5" width="382" height="219.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DFc-Ls-Zsf">
                                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="20"/>
@@ -366,6 +402,10 @@
                         <outlet property="loader" destination="AMq-FY-Dxx" id="EhN-2W-c9m"/>
                         <outlet property="scrollView" destination="1PT-oU-YOD" id="9yT-SX-ceM"/>
                         <outlet property="swtInitRecurringSale" destination="4mt-d3-LCa" id="ulr-Gl-1Ks"/>
+                        <outlet property="tfCardCVV" destination="ejh-09-sQz" id="cEz-cS-Scj"/>
+                        <outlet property="tfCardExpiry" destination="zo0-7q-gy7" id="1ON-Rv-7dW"/>
+                        <outlet property="tfCardHolderName" destination="uRo-z2-nh7" id="pOy-19-4Op"/>
+                        <outlet property="tfCardNumber" destination="21U-6b-ZJL" id="IR3-fd-efq"/>
                         <outlet property="tfChannelId" destination="i0N-Z9-IuL" id="b8j-VL-oCz"/>
                         <outlet property="tfOrderAmount" destination="C6T-p8-piz" id="1td-kz-p9r"/>
                         <outlet property="tfOrderCurrencyCode" destination="phK-dL-QUc" id="eun-ha-K8Y"/>
@@ -380,7 +420,7 @@
                         <outlet property="tfPayerFirstName" destination="CyW-To-Fo9" id="9p1-ka-GAA"/>
                         <outlet property="tfPayerIpAddress" destination="JyU-bN-35P" id="pBK-Jr-t6L"/>
                         <outlet property="tfPayerLastName" destination="FqA-LI-m7d" id="aPX-4j-8BR"/>
-                        <outlet property="tfPayerMiddleName" destination="8aW-Rq-66x" id="86w-OX-67p"/>
+                        <outlet property="tfPayerMiddleName" destination="8aW-Rq-66x" id="rSF-c7-hGQ"/>
                         <outlet property="tfPayerPhone" destination="R27-gd-h48" id="lLU-ri-esg"/>
                         <outlet property="tfPayerState" destination="0ch-R3-EpW" id="Wf6-gX-mTR"/>
                         <outlet property="tfPayerZip" destination="anc-kH-Lf7" id="Ipp-UG-odV"/>

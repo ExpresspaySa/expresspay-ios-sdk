@@ -33,8 +33,8 @@ final class MainVC: UIViewController {
         
         ExpressPaySDK.config(
             ExpressPayCredential(
-                clientKey: LIVE_MERCHANT_KEY,
-                clientPass: LIVE_MERCHANT_PASSWORD,
+                clientKey: MERCHANT_KEY,
+                clientPass: MERCHANT_PASSWORD,
                 paymentUrl: EXPRESSPAY_PAYMENT_URL
             )
         )
@@ -46,7 +46,7 @@ final class MainVC: UIViewController {
         )
         
         let order = ExpressPaySaleOrder(
-            id: UUID().uuidString,
+            id: Date().timeStamp(),
             amount: 0.10,
             currency: "SAR",
             description: "Test Order"

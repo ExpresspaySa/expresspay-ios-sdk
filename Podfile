@@ -7,6 +7,8 @@ target 'Sample' do
 
   # Pods for Sample
   pod 'ExpressPaySDK', '~> 1.1.6'  ## From POD
+#  pod 'ExpressPaySDK', :git => 'https://github.com/ExpresspaySa/expresspay-ios-sdk-pod.git', :branch => 'main' ## From Repo
+#  pod 'ExpressPaySDK', :path => '../expresspay-ios-sdk-pod' ## Local
   
 
 end

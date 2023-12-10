@@ -67,8 +67,8 @@ extension ApplePayVC {
     override func viewDidLoad() {
         ExpressPaySDK.config(
             ExpressPayCredential(
-                clientKey: LIVE_MERCHANT_KEY,
-                clientPass: LIVE_MERCHANT_PASSWORD,
+                clientKey: MERCHANT_KEY,
+                clientPass: MERCHANT_PASSWORD,
                 paymentUrl: EXPRESSPAY_PAYMENT_URL
             )
         )
@@ -81,7 +81,7 @@ extension ApplePayVC {
 
 private extension ApplePayVC {
     func randomize(isAll: Bool) {
-        tfOrderId.text = UUID().uuidString
+        tfOrderId.text = Date().timeStamp()
         tfOrderAmount.text = String(format: "%.2f", Double.random(in: 1...1.05))
         tfOrderDescription.text = faker.lorem.sentences()
         tfOrderCurrencyCode.text = ["SAR"].randomElement()
@@ -144,7 +144,7 @@ private extension ApplePayVC {
         ExpressApplePay()
             .set(order: order)
             .set(payer: payer)
-            .set(applePayMerchantID: LIVE_APPLEPAY_MERCHANT_ID)
+            .set(applePayMerchantID: APPLEPAY_MERCHANT_ID)
             .enable(logs: true)
             .on(authentication: { auth in
                 debugPrint("onAuthentication: \(String(data: auth.token.paymentData, encoding: .utf8)!)")

@@ -37,7 +37,7 @@ final class ExpressPayRecurringSaleVC: TransactionViewController {
     }
     
     @IBAction func randomizeAction() {
-        tfOrderId.text = UUID().uuidString
+        tfOrderId.text = Date().timeStamp()
         tfOrderAmount.text = String(format: "%.2f", Double.random(in: 0...10000))
         tfOrderDescription.text = faker.lorem.sentences()
         
@@ -68,8 +68,8 @@ final class ExpressPayRecurringSaleVC: TransactionViewController {
         
         ExpressPaySDK.config(
             ExpressPayCredential(
-                clientKey: TEST_MERCHANT_KEY,
-                clientPass: TEST_MERCHANT_PASSWORD,
+                clientKey: MERCHANT_KEY,
+                clientPass: MERCHANT_PASSWORD,
                 paymentUrl: EXPRESSPAY_PAYMENT_URL
             )
         )
