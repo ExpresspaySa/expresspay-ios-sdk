@@ -12,6 +12,11 @@ import ExpressPaySDK
 final class ExpressPaySaleVC: BaseViewController {
     var customCard:ExpressPayCard? = nil
     
+    private var _payer:ExpressPayPayer!
+    private var _order:ExpressPaySaleOrder!
+    private var _saleOptions:ExpressPaySaleOptions?
+    private var _card:ExpressPayCard!
+    
     // MARK: - IBOutlets
     
     @IBOutlet private weak var tfOrderId: UITextField!
@@ -197,43 +202,49 @@ private extension ExpressPaySaleVC {
             
         guard let selectedCardIndex = cardsContainer.selectedIndex else { return }
         
-        let order = ExpressPaySaleOrder(id: tfOrderId.text ?? "",
-                                       amount: Double(tfOrderAmount.text ?? "") ?? 0,
-                                       currency: tfOrderCurrencyCode.text ?? "",
-                                       description: tfOrderDescription.text ?? "")
+        _order = ExpressPaySaleOrder(
+            id: tfOrderId.text ?? "",
+            amount: Double(tfOrderAmount.text ?? "") ?? 0,
+            currency: tfOrderCurrencyCode.text ?? "",
+            description: tfOrderDescription.text ?? ""
+        )
         
-        let card = customCard ?? getCard(at: selectedCardIndex)
+        _payer = ExpressPayPayer(
+            firstName: tfPayerFirstName.text ?? "",
+            lastName: tfPayerLastName.text ?? "",
+            address: tfPayerAddress.text ?? "",
+            country: tfPayerCountryCode.text ?? "",
+            city: tfPayerCity.text ?? "",
+            zip: tfPayerZip.text ?? "",
+            email: tfPayerEmail.text ?? "",
+            phone: tfPayerPhone.text ?? "",
+            ip: tfPayerIpAddress.text ?? "",
+            options: ExpressPayPayerOptions(
+                middleName: tfPayerMiddleName.text,
+                birthdate: Foundation.Date.formatter.date(from: tfPayerBirthday.text ?? ""),
+                address2: tfPayerAddress2.text,
+                state: tfPayerState.text
+            )
+        )
         
-        let payerOptions = ExpressPayPayerOptions(middleName: tfPayerMiddleName.text,
-                                                 birthdate: Foundation.Date.formatter.date(from: tfPayerBirthday.text ?? ""),
-                                                 address2: tfPayerAddress2.text,
-                                                 state: tfPayerState.text)
+        _card = customCard ?? getCard(at: selectedCardIndex)
         
-        let payer = ExpressPayPayer(firstName: tfPayerFirstName.text ?? "",
-                                   lastName: tfPayerLastName.text ?? "",
-                                   address: tfPayerAddress.text ?? "",
-                                   country: tfPayerCountryCode.text ?? "",
-                                   city: tfPayerCity.text ?? "",
-                                   zip: tfPayerZip.text ?? "",
-                                   email: tfPayerEmail.text ?? "",
-                                   phone: tfPayerPhone.text ?? "",
-                                   ip: tfPayerIpAddress.text ?? "",
-                                   options: payerOptions)
-        
-        let saleOptions = ExpressPaySaleOptions(channelId: tfChannelId.text,
+        _saleOptions = ExpressPaySaleOptions(channelId: tfChannelId.text,
                                                recurringInit: swtInitRecurringSale.isOn)
         
-        let transaction = ExpressPayTransactionStorage.Transaction(payerEmail: payer.email,
-                                                                  cardNumber: card.number)
+        let transaction = ExpressPayTransactionStorage.Transaction(payerEmail: _payer.email,
+                                                                  cardNumber: _card.number)
         
         let termUrl3ds = "https://expresspay.sa/process-completed"
         
-        saleAdapter.execute(order: order,
-                            card: card,
-                            payer: payer,
-                            termUrl3ds: termUrl3ds,
-                            options: saleOptions,
-                            auth: isAuth) { [weak self] (response) in
+        saleAdapter.execute(
+            order: _order,
+            card: _card,
+            payer: _payer,
+            termUrl3ds: termUrl3ds,
+            options: _saleOptions,
+            auth: isAuth
+        ){ [weak self] (response) in
             guard let self = self else { return }
             
             switch response {
@@ -269,13 +280,20 @@ private extension ExpressPaySaleVC {
     func redirect(response:ExpressPaySaleRedirect){
         
         SaleRedirectionView()
-            .setup(response: response, onTransactionSuccess: { result in
-                print("onTransactionSuccess: \(result)")
-                self.show(title: "Success", message: "\(result)")
+            .setup(
+                response: response,
+                payer: _payer,
+                order: _order,
+                saleOptions: _saleOptions,
+                card: _card,
+                onTransactionSuccess: { result in
+                    print("onTransactionSuccess: \(result.jsonString)")
+                    self.show(title: "Success", message: "\(result.jsonString)")
                 
-            }, onTransactionFailure: { result in
-                print("onTransactionFailure: \(result)")
-                self.show(title: "Failure", message: "\(result)")
+            },
+                onTransactionFailure: { result in
+                    print("onTransactionFailure: \(result)")
+                    self.show(title: "Failure", message: "\(result.jsonString)")
                 
             })
             .enableLogs()

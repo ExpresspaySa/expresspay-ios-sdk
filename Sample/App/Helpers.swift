@@ -32,6 +32,17 @@ extension Date {
     }
 }
 
+extension Encodable {
+    var jsonString:String{
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            return String(data:  try! encoder.encode(self), encoding: .utf8)!
+        } catch{
+            return "\(self)"
+        }
+    }
+}
 extension Faker {
     static func birthday(format: String = Foundation.Date.formatter.dateFormat) -> String {
         var compnents = DateComponents()

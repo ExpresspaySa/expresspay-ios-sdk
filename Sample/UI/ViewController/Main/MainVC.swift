@@ -85,18 +85,18 @@ final class MainVC: UIViewController {
                 debugPrint(result)
                 debugPrint(err)
                 cardDetailVC?.dismiss(animated: true)
-                self.show(title: "Failure", message: "\(result)\n\(err)")
+                self.show(title: "Failure", message: "\(result)\n\n\(err?.jsonString ?? "")")
             })
-            .on(transactionSuccess: { res, data in
-                debugPrint(res)
+            .on(transactionSuccess: { result, data in
+                debugPrint(result)
                 debugPrint(data)
                 cardDetailVC?.dismiss(animated: true)
-                self.show(title: "Success", message: "\(res)\n\(data)")
+                self.show(title: "Success", message: "\(result)\n\n\(data?.jsonString ?? "")")
 
             }).initialize(
                 target: self,
                 onError: { err in
-                    debugPrint(err)
+                    self.show(title: "Error", message: err.description)
 
                 },
                 onPresent: {
